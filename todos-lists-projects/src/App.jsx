@@ -17,7 +17,6 @@ function App() {
     };
 
     setTasks([...tasks, newTask]);
-
     setNewTaskText("");
   };
 
@@ -32,14 +31,26 @@ function App() {
           value={newTaskText}
           onChange={(event) => setNewTaskText(event.target.value)}
         />
-
         <button onClick={handleAddTask}>Add Task</button>
       </div>
 
       <hr />
 
-      <p>Number of tasks: **{tasks.length}**</p>
-      <p>Current text: {newTaskText}</p>
+      <ul style={{ listStyleType: "none", padding: 0 }}>
+        {tasks.map((task) => (
+          <li
+            key={task.id}
+            style={{
+              border: "1px solid #eee",
+              padding: "10px",
+              margin: "5px 0",
+              borderRadius: "4px",
+            }}
+          >
+            {task.text}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
