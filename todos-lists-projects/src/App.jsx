@@ -20,6 +20,21 @@ function App() {
     setNewTaskText("");
   };
 
+  const handleToggleComplete = (idToToggle) => {
+    const updatedTasks = tasks.map((task) => {
+      if (task.id === idToToggle) {
+        return {
+          ...task,
+          isComplete: !task.isComplete,
+        };
+      }
+
+      return task;
+    });
+
+    setTasks(updatedTasks);
+  };
+
   return (
     <div style={{ padding: "20px" }}>
       <h1>My To-Do List</h1>
@@ -40,11 +55,15 @@ function App() {
         {tasks.map((task) => (
           <li
             key={task.id}
+            onClick={() => handleToggleComplete(task.id)}
             style={{
               border: "1px solid #eee",
               padding: "10px",
               margin: "5px 0",
               borderRadius: "4px",
+              cursor: "pointer",
+              textDecoration: task.isComplete ? "line-through" : "none",
+              opacity: task.isComplete ? 0.5 : 1,
             }}
           >
             {task.text}
